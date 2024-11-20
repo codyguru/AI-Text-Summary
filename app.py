@@ -6,12 +6,10 @@ from concurrent.futures import ThreadPoolExecutor
 
 app = Flask(__name__)
 
-# device = 0 if torch.cuda.is_available() else -1
 summarizer = pipeline(
     "summarization", 
     model="facebook/bart-large-cnn",
     device=-1,
-    # torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32
 )
 
 def process_chunk(chunk):
@@ -50,4 +48,4 @@ def home():
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=False)

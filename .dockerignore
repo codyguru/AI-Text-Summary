@@ -1,0 +1,6 @@
+.gitignore
+calc_disk_space.py
+README.md
+text-summarizer.pem
+.simple
+Dockerfile
