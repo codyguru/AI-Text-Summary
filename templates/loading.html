@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Text Summarizer - Loading</title>
+    <link rel="icon" href="https://imgs.search.brave.com/AzDAgv6IUsDdjSin-f8rOa3PDzPZtaS3c6foKKjK8sI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93ZWJz/dG9ja3Jldmlldy5u/ZXQvaW1hZ2VzL3Nt/aWxleS1mYWNlLWNs/aXAtYXJ0LWVtb3Rp/b24tMTUucG5n">
+    <style>
+        body {
+          max-width: 800px; 
+          margin: 0 auto; 
+          padding: 20px; 
+          font-family: Arial; 
+          color: #fff; 
+          background: #000; 
+        }
+        .loader {
+            border: 5px solid #000;
+            border-radius: 50%;
+            border-top: 5px solid #38176e;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .status-message {
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .error-message {
+            color: red;
+            display: none;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+  <h1>Text Summarizer</h1>
+  <div class="loader"></div>
+  <div id="statusMessage" class="status-message">
+      Initializing model... This may take a few minutes.
+  </div>
+  <div id="errorMessage" class="error-message"></div>
+
+  <script>
+      async function checkStatus() {
+          try {
+              const response = await fetch('/status');
+              if (!response.ok) {
+                  throw new Error('Failed to check status');
+              }
+              const data = await response.json();
+              
+              document.getElementById('statusMessage').textContent = data.message;
+              
+              if (data.state === 'ready') {
+                  window.location.reload();
+              } else {
+                  setTimeout(checkStatus, 5000);
+              }
+          } catch (error) {
+              const errorDiv = document.getElementById('errorMessage');
+              errorDiv.style.display = 'block';
+              errorDiv.textContent = `An error occurred: ${error.message}. Please refresh the page to try again.`;
+              console.error('Error:', error);
+          }
+      }
+
+      window.addEventListener('load', checkStatus);
+  </script>
+</body>
+</html>

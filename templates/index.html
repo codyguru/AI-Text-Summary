@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Text Summarizer</title>
+    <link rel="icon" href="https://imgs.search.brave.com/AzDAgv6IUsDdjSin-f8rOa3PDzPZtaS3c6foKKjK8sI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93ZWJz/dG9ja3Jldmlldy5u/ZXQvaW1hZ2VzL3Nt/aWxleS1mYWNlLWNs/aXAtYXJ0LWVtb3Rp/b24tMTUucG5n">
     <style>
         body { max-width: 800px; margin: 0 auto; padding: 20px; font-family: Arial; color: #fff; background: #000; }
         textarea { width: 100%; height: 200px; margin: 20px 0; background: #9e9dad; }
@@ -21,7 +22,7 @@
 </head>
 <body>
     <h1>Fast Text Summarizer</h1>
-    <form method="POST" onsubmit="showLoading()">
+    <form action="/summarize" method="POST" onsubmit="showLoading()">
         <textarea name="text" placeholder="Paste your text here...">{{ original_text }}</textarea>
         <button id="submit-btn" type="submit">Summarize</button>
     </form>

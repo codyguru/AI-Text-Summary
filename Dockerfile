@@ -16,8 +16,14 @@ COPY app.py .
 RUN mkdir -p templates
 COPY templates/index.html templates/
 
-ENV PORT=5000
-
 EXPOSE 5000
 
-CMD ["python", "app.py"]
+CMD ["gunicorn", \
+     "--bind", "0.0.0.0:5000", \
+     "--workers", "1", \
+     "--threads", "4", \
+     "--timeout", "300", \
+     "--worker-class", "gthread", \
+     "--worker-tmp-dir", "/dev/shm", \
+     "--log-level", "info", \
+     "app:app"]
