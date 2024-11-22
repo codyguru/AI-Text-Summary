@@ -56,3 +56,4 @@ to deploy with AWS instead and set up the infrastructure in a way to mitigate co
 on-demand instance structure for another project already deployed. I implemented cleaning functions to help 
 optomize the project since it didn't need to keep the cache every time it was run.
 
+4) There is a loading.html in templates that is used for the AWS instance so can be ignored for local use.
